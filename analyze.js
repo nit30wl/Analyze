@@ -8,7 +8,7 @@ var m=domainoripre.exec(input)
 if (m){//valid
 
 //don't search local values
-if (/^10\..+|^192\.168\..+|^127\..*/.test(m[0]) || /.*\.local$/.test(m[0])){
+if (/(^127\.)|(^10\.)|(^172\.1[6-9]\.)|(^172\.2[0-9]\.)|(^172\.3[0-1]\.)|(^192\.168\.)/.test(m[0]) || /.*\.local$/.test(m[0])){
   sarcasm=["I'm afraid I can't do that Dave", "You want to see my privates?!",
     "There is no try", "Palm - meet Face"]
   alert(sarcasm[(Math.random()*sarcasm.length).toFixed(0)])
@@ -16,7 +16,7 @@ if (/^10\..+|^192\.168\..+|^127\..*/.test(m[0]) || /.*\.local$/.test(m[0])){
   if (m[1]){ //domain
     chrome.storage.sync.get({
       //'https://www.infosniper.net/?domain=%s'
-      'domUrl': ['https://shodan.io/search?query=%s','https://censys.io/ipv4?q=%s','https://virustotal.com/search/?query=%s','https://cymon.io/domain/%s','https://www.threatcrowd.org/domain.php?%s','https://exchange.xforce.ibmcloud.com/url/%s','https://quttera.com/sitescan/%s','https://sitecheck.sucuri.net/results/%s','https://urlquery.net/search?q=%s']
+      'domUrl': ['https://shodan.io/search?query=%s','https://censys.io/ipv4?q=%s','https://virustotal.com/search/?query=%s','https://cymon.io/domain/%s','https://www.threatcrowd.org/domain.php?domain=%s','https://exchange.xforce.ibmcloud.com/url/%s','https://quttera.com/sitescan/%s','https://sitecheck.sucuri.net/results/%s','https://urlquery.net/search?q=%s']
     }, function(items) {
       doSearch(items.domUrl, m[0], tab);
     });
